@@ -1,10 +1,11 @@
 # async-grpc-demo
-Demo Async Client-Server Application gRPC
+
+This is a simple application demonstrating a Client-Server Application exchanging messages asynchronously using gRPC.
 
 To run, execute the following in a terminal window
 
 ```shell
-mvn clean package exec:java -Dexec.mainClass=org.nuhara.demos.GrpcServer
+mvn package exec:java -Dexec.mainClass=org.nuhara.demos.GrpcServer
 ```
 
 then, run the following in a different window
