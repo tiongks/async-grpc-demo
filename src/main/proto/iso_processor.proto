@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package org.nuhara.demos.proto;
+
+message ISORequest {
+	string mti = 1;
+	string message = 2;
+}
+
+message ISOResponse {
+	string mti = 1;
+	string message = 2;
+	string responseCode = 3;
+}
+
+service ISOProcessor {
+	rpc process(ISORequest) returns (stream ISOResponse);
+}
