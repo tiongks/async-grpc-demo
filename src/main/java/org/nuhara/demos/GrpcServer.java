@@ -9,22 +9,23 @@ import io.opentracing.Tracer;
 import io.opentracing.contrib.ServerTracingInterceptor;
 
 public class GrpcServer {
-	
+
 	private static final Logger logger = Logger.getLogger(GrpcServer.class.getCanonicalName());
 	private static final Tracer tracer = Tracing.initTracer("async-grpc-demo");
-	
+
 	public static void main(String[] args) throws IOException, InterruptedException {
-		ServerTracingInterceptor tracingInterceptor = new ServerTracingInterceptor(tracer);
 		
+		ServerTracingInterceptor tracingInterceptor = new ServerTracingInterceptor(tracer);
+
 		Server server = ServerBuilder.forPort(8181)
 				.addService(tracingInterceptor.intercept(new ISOProcessorImpl()))
 //				.addService(new ISOProcessorImpl())
 				.build();
-		
+
 		server.start();
-		
+
 		logger.info("Server Started.");
-		
+
 		server.awaitTermination();
 	}
 

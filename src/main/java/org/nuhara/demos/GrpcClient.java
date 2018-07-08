@@ -1,6 +1,7 @@
 package org.nuhara.demos;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Logger;
 
 import org.nuhara.demos.proto.ISOProcessorGrpc;
@@ -11,6 +12,7 @@ import org.nuhara.demos.proto.IsoProcessor.ISOResponse;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
+import io.opentracing.Scope;
 import io.opentracing.Span;
 import io.opentracing.Tracer;
 import io.opentracing.contrib.ClientTracingInterceptor;
@@ -40,13 +42,14 @@ public class GrpcClient {
 		}
 		
 		for (ISORequest request: requestList) {
-			logger.info("Sending: " + request.getMti());
-			Span span = tracer.buildSpan(request.getMti()).start();
+			logger.info("Sending: " + request.getRrn());
+			Span span = tracer.buildSpan(request.getRrn()).start();
+			span.log("client-start");
 			stub.process(request, new StreamObserver<IsoProcessor.ISOResponse>() {
 				
 				@Override
 				public void onNext(ISOResponse response) {
-					span.finish();
+					span.log("client-next");
 					logger.info("Response: " + response.getRrn() + "-" + response.getMessage());
 				}
 				
@@ -57,6 +60,8 @@ public class GrpcClient {
 				
 				@Override
 				public void onCompleted() {
+					span.log("client-complete");
+					span.finish();
 					channel.shutdown();	
 				}
 			});

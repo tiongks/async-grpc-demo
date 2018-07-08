@@ -29,7 +29,9 @@ public class ISOProcessorImpl extends ISOProcessorImplBase {
 				.build();
 		
 		Span span = OpenTracingContextKey.activeSpan();
+		span.log("server-process");
 		span.setTag("rrn", request.getRrn());
+		span.setTag("span.kind", "server");
 		
 		try {
 			Thread.sleep(random.nextInt(20)*10);
