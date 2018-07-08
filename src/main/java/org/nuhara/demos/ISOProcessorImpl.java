@@ -1,5 +1,6 @@
 package org.nuhara.demos;
 
+import java.util.Random;
 import java.util.logging.Logger;
 
 import org.nuhara.demos.proto.ISOProcessorGrpc.ISOProcessorImplBase;
@@ -11,6 +12,7 @@ import io.grpc.stub.StreamObserver;
 public class ISOProcessorImpl extends ISOProcessorImplBase {
 	
 	Logger logger = Logger.getLogger(ISOProcessorImpl.class.getCanonicalName());
+	final static Random random = new Random();
 
 	@Override
 	public void process(ISORequest request, StreamObserver<ISOResponse> responseObserver) {
@@ -22,6 +24,12 @@ public class ISOProcessorImpl extends ISOProcessorImplBase {
 				.setMessage("from the server")
 				.setResponseCode("00")
 				.build();
+		
+		try {
+			Thread.sleep(random.nextInt(20)*10);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		
 		responseObserver.onNext(response);
 		
