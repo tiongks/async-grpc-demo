@@ -4,13 +4,15 @@ package org.nuhara.demos.proto;
 
 message ISORequest {
 	string mti = 1;
-	string message = 2;
+	string rrn = 2;
+	string message = 3;
 }
 
 message ISOResponse {
 	string mti = 1;
-	string message = 2;
-	string responseCode = 3;
+	string rrn = 2;
+	string message = 3;
+	string responseCode = 4;
 }
 
 service ISOProcessor {
