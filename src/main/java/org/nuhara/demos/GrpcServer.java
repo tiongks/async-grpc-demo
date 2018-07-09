@@ -24,7 +24,7 @@ public class GrpcServer {
 
 		server.start();
 
-		logger.info("Server Started.");
+		logger.info("gRPC Server Started.");
 
 		server.awaitTermination();
 	}
