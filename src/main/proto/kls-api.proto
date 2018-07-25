@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package com.paymaya.cfs;
+
+enum MessageTypeIndicator {
+    AUTH_REQ = 0;
+    AUTH_REPEAT = 1;
+    AUTH_RESPONSE = 2;
+    FIN_REQ = 3;
+    FIN_REPEAT = 4;
+    FIN_RESPONSE = 5;
+    REVERsAL_REQ = 6;
+    REVERSAL_REQ_REPEAT = 6;
+    REVERSAL_REQ_RESPONSE = 7;
+    REVERSAL_ADV = 8;
+    REVERSAL_ADV_REPEAT = 9;
+    REVERSAL_ADV_RESPONSE = 10;
+}
+
+enum Channel {
+    SWITCH = 1;
+    EFS = 2;
+    ThirdParty = 3;
+}
+
+message Action {
+	MessageTypeIndicator mti = 1;
+	string procCode = 2;
+	string rrn = 3;
+	string stan = 4;
+	int64 amtTxn = 5;
+	int32 currencyTxn = 6;
+	int64 amtSettlement = 7;
+	int32 currencySettlement = 8;
+	string transmissionDateTime = 9;
+	string localTxnDateTime = 10;
+	string responseCode = 11;
+	string dkeKeyData = 12;
+	string misc = 13;
+	string metadata = 14;
+}
+
+message Message {
+	string id = 1;
+	MessageTypeIndicator mti = 2;
+	string timestamp = 3;
+	Channel channle = 4;
+	repeated Action actions = 5;
+}
+
+service Kalupi {
+	rpc Process(stream Message) returns (stream Message);
+}

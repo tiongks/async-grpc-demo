@@ -16,7 +16,7 @@ public class GrpcServer {
 	public static void main(String[] args) throws IOException, InterruptedException {
 		
 		ServerTracingInterceptor tracingInterceptor = new ServerTracingInterceptor(tracer);
-
+		
 		Server server = ServerBuilder.forPort(8181)
 				.addService(tracingInterceptor.intercept(new ISOProcessorImpl()))
 //				.addService(new ISOProcessorImpl())
