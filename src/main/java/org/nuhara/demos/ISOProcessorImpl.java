@@ -3,10 +3,11 @@ package org.nuhara.demos;
 import java.util.Random;
 import java.util.logging.Logger;
 
+import org.nuhara.model.proto.HelloGrpc.HelloImplBase;
+import org.nuhara.model.proto.IsoProcessor;
+import org.nuhara.model.proto.IsoProcessor.BenchmarkMessage;
+
 import io.grpc.stub.StreamObserver;
-import main.HelloGrpc.HelloImplBase;
-import main.IsoProcessor;
-import main.IsoProcessor.BenchmarkMessage;
 
 public class ISOProcessorImpl extends HelloImplBase {
 	

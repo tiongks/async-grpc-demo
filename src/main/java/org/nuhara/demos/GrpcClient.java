@@ -1,23 +1,22 @@
 package org.nuhara.demos;
 
 import java.util.ArrayList;
-import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.logging.Logger;
+
+import org.nuhara.model.proto.HelloGrpc;
+import org.nuhara.model.proto.IsoProcessor;
+import org.nuhara.model.proto.IsoProcessor.BenchmarkMessage;
 
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
-import com.google.common.util.concurrent.MoreExecutors;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.opentracing.Span;
 import io.opentracing.Tracer;
 import io.opentracing.contrib.ClientTracingInterceptor;
-import main.HelloGrpc;
-import main.IsoProcessor;
-import main.IsoProcessor.BenchmarkMessage;
 
 public class GrpcClient {
 

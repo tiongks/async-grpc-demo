@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package main;
+package org.nuhara.model.proto;
 
 //option optimize_for = SPEED;
 

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package com.paymaya.cfs;
+package org.nuhara.model.proto;
 
 enum MessageTypeIndicator {
     AUTH_REQ = 0;
@@ -10,17 +10,17 @@ enum MessageTypeIndicator {
     FIN_REPEAT = 4;
     FIN_RESPONSE = 5;
     REVERsAL_REQ = 6;
-    REVERSAL_REQ_REPEAT = 6;
-    REVERSAL_REQ_RESPONSE = 7;
-    REVERSAL_ADV = 8;
-    REVERSAL_ADV_REPEAT = 9;
-    REVERSAL_ADV_RESPONSE = 10;
+    REVERSAL_REQ_REPEAT = 7;
+    REVERSAL_REQ_RESPONSE = 8;
+    REVERSAL_ADV = 9;
+    REVERSAL_ADV_REPEAT = 10;
+    REVERSAL_ADV_RESPONSE = 11;
 }
 
 enum Channel {
-    SWITCH = 1;
-    EFS = 2;
-    ThirdParty = 3;
+    SWITCH = 0;
+    EFS = 1;
+    ThirdParty = 2;
 }
 
 message Action {
